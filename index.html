@@ -1,0 +1,504 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <!-- SEO -->
+  <title>Function8 | GP-led wellbeing that feels human</title>
+  <meta name="description" content="Function8 is GP-led wellbeing support inspired by functional medicine. Calm, friendly consultations that help you feel listened to, looked after, and healthier." />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <link rel="canonical" href="https://example.com/" />
+
+  <!-- Social previews (replace domain + image later) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Function8 | GP-led wellbeing that feels human" />
+  <meta property="og:description" content="Feel listened to. Feel supported. Feel like yourself again — with calm, practical care." />
+  <meta property="og:url" content="https://example.com/" />
+  <meta property="og:image" content="https://example.com/og-function8.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <meta name="theme-color" content="#1FA7A0" />
+
+  <!-- Structured data (edit specifics once you have real info) -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"MedicalClinic",
+    "name":"Function8",
+    "description":"GP-led wellbeing support inspired by functional medicine. Calm, kind, evidence-informed care.",
+    "url":"https://example.com/",
+    "medicalSpecialty":["GeneralPractice"]
+  }
+  </script>
+
+  <style>
+    :root{
+      --mint:#E9FBF1; --sea:#1FA7A0; --teal:#0B6E6A; --sun:#FFD36E; --peach:#FFB3A7;
+      --ink:#0C1B1A; --slate:#355553; --border:rgba(11,110,106,.15);
+      --shadow:0 18px 55px rgba(12,27,26,.10); --radius:18px; --max:1100px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0; color:var(--ink);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      background:
+        radial-gradient(900px 500px at 15% -10%, rgba(255,211,110,.55), transparent 60%),
+        radial-gradient(900px 500px at 100% 10%, rgba(31,167,160,.35), transparent 55%),
+        linear-gradient(180deg, var(--mint), #fff 40%, #fff 100%);
+      overflow-x:hidden;
+    }
+    a{color:inherit}
+    .wrap{max-width:var(--max); margin:0 auto; padding:24px; position:relative; z-index:1}
+
+    /* Optional Three.js canvas behind everything */
+    #bgCanvas{position:fixed; inset:0; z-index:0; pointer-events:none; opacity:.55}
+
+    /* soft blobs */
+    .blob{position:fixed; z-index:0; filter:blur(22px); opacity:.55; pointer-events:none; animation:floaty 12s ease-in-out infinite}
+    .blob.a{
+      width:360px; height:360px; border-radius:50%;
+      background: radial-gradient(circle at 30% 30%, rgba(255,211,110,.95), rgba(255,179,167,.35), transparent 70%);
+      top:-90px; left:-80px; animation-duration:14s;
+    }
+    .blob.b{
+      width:420px; height:420px; border-radius:50%;
+      background: radial-gradient(circle at 30% 30%, rgba(31,167,160,.55), rgba(11,110,106,.15), transparent 72%);
+      bottom:-140px; right:-130px; animation-duration:16s; animation-direction:reverse;
+    }
+    @keyframes floaty{0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(18px,-14px) scale(1.03)}}
+
+    header{
+      position:sticky; top:0; z-index:10;
+      backdrop-filter: blur(10px);
+      background: rgba(255,255,255,.70);
+      border-bottom:1px solid rgba(11,110,106,.10);
+    }
+    .nav{display:flex; align-items:center; justify-content:space-between; gap:18px}
+    .brand{display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:.2px; text-decoration:none}
+    .mark{
+      width:38px; height:38px; border-radius:12px;
+      background: radial-gradient(14px 14px at 30% 30%, rgba(255,255,255,.95), rgba(255,255,255,0)),
+                  linear-gradient(135deg, var(--sea), var(--teal));
+      display:grid; place-items:center; color:#fff; font-weight:900;
+      box-shadow:0 10px 25px rgba(31,167,160,.28);
+    }
+    .brand small{display:block; font-weight:600; color:var(--slate)}
+    nav a{color:var(--slate); text-decoration:none; padding:10px 10px; border-radius:10px; font-size:14px}
+    nav a:hover{background:rgba(31,167,160,.08)}
+
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center; gap:10px;
+      padding:12px 16px; border-radius:999px;
+      border:1px solid rgba(11,110,106,.25);
+      background: rgba(255,255,255,.9);
+      text-decoration:none; font-weight:750;
+      box-shadow:0 10px 25px rgba(12,27,26,.07);
+      transition:transform .12s ease, filter .12s ease, box-shadow .12s ease;
+      white-space:nowrap; position:relative; overflow:hidden;
+    }
+    .btn.primary{
+      background: linear-gradient(135deg, var(--sea), var(--teal));
+      color:#fff; border:none;
+      box-shadow:0 18px 40px rgba(11,110,106,.25);
+    }
+    .btn:hover{transform:translateY(-1px)}
+    .btn::after{
+      content:""; position:absolute; inset:-40% -20%;
+      background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,.35), transparent 70%);
+      transform: translateX(-140%) rotate(10deg);
+      transition: transform .7s ease;
+    }
+    .btn:hover::after{transform:translateX(140%) rotate(10deg)}
+
+    .pill{
+      display:inline-flex; gap:10px; align-items:center;
+      padding:10px 14px; border:1px solid var(--border);
+      background: rgba(255,255,255,.75);
+      backdrop-filter: blur(10px);
+      border-radius:999px; font-size:14px; color:var(--slate);
+    }
+    .dot{width:10px; height:10px; border-radius:50%;
+      background: linear-gradient(135deg, var(--sun), var(--peach));
+      box-shadow:0 0 0 6px rgba(255,211,110,.25);
+    }
+
+    .hero{padding:40px 0 18px; display:grid; grid-template-columns:1.2fr .8fr; gap:28px; align-items:center}
+    h1{font-size:clamp(34px,4vw,54px); line-height:1.05; margin:14px 0 12px; letter-spacing:-.5px}
+    .lead{font-size:18px; color:var(--slate); line-height:1.6; margin:0 0 18px; max-width:60ch}
+    .heroActions{display:flex; gap:12px; flex-wrap:wrap; margin-top:14px}
+    .trust{display:flex; gap:14px; flex-wrap:wrap; margin-top:18px; color:var(--slate); font-size:14px}
+    .trust b{color:var(--ink)}
+
+    .card{background: rgba(255,255,255,.86); border:1px solid var(--border); border-radius:var(--radius); box-shadow:var(--shadow)}
+    .heroCard{padding:18px; overflow:hidden; position:relative}
+    .heroCard:before{content:""; position:absolute; inset:-120px -120px auto auto; width:240px; height:240px; border-radius:50%;
+      background: radial-gradient(circle at 30% 30%, rgba(255,211,110,.92), rgba(255,179,167,.25), transparent 70%); opacity:.9;}
+    .heroCard:after{content:""; position:absolute; inset:auto auto -120px -120px; width:260px; height:260px; border-radius:50%;
+      background: radial-gradient(circle at 30% 30%, rgba(31,167,160,.45), rgba(11,110,106,.12), transparent 72%); opacity:.9;}
+    .heroCardInner{position:relative; z-index:1}
+
+    .checklist{list-style:none; padding:0; margin:10px 0 0; display:grid; gap:10px; color:var(--slate); font-size:14.8px}
+    .checklist li{display:flex; gap:10px; align-items:flex-start; padding:10px 12px; border-radius:14px;
+      background:rgba(31,167,160,.06); border:1px solid rgba(31,167,160,.14)}
+    .tick{flex:0 0 22px; width:22px; height:22px; border-radius:50%;
+      background: linear-gradient(135deg, var(--sun), var(--peach));
+      display:grid; place-items:center; color:#2b1d0d; font-weight:900; margin-top:1px}
+
+    section{padding:28px 0}
+    h2{margin:0; font-size:26px; letter-spacing:-.3px}
+    .sub{margin:8px 0 0; color:var(--slate); max-width:70ch; line-height:1.6}
+    .grid3{display:grid; grid-template-columns:repeat(3, 1fr); gap:14px}
+    .grid2{display:grid; grid-template-columns:repeat(2, 1fr); gap:14px}
+    .tile{padding:16px}
+    .tile h3{margin:0 0 6px; font-size:16.5px}
+    .tile p{margin:0; color:var(--slate); line-height:1.6; font-size:14.8px}
+    .icon{width:38px; height:38px; border-radius:14px; background:rgba(31,167,160,.10);
+      border:1px solid rgba(31,167,160,.18); display:grid; place-items:center; margin-bottom:10px; color:var(--teal); font-weight:900}
+
+    .cta{padding:18px; display:flex; align-items:center; justify-content:space-between; gap:16px;
+      background: radial-gradient(500px 220px at 20% 10%, rgba(255,211,110,.75), transparent 60%),
+                  radial-gradient(500px 220px at 100% 40%, rgba(31,167,160,.35), transparent 60%),
+                  rgba(255,255,255,.86);}
+
+    input, textarea{width:100%; padding:12px; border-radius:14px; border:1px solid var(--border); outline:none; font:inherit; background:rgba(255,255,255,.9)}
+    input:focus, textarea:focus{box-shadow:0 0 0 5px rgba(31,167,160,.14)}
+    label strong{display:block; margin-bottom:6px}
+
+    footer{padding:18px 0 44px; color:var(--slate); font-size:13.8px}
+    .footerRow{display:flex; justify-content:space-between; gap:14px; flex-wrap:wrap; border-top:1px solid rgba(11,110,106,.10); padding-top:18px}
+
+    /* reveal */
+    .reveal{opacity:0; transform:translateY(14px); transition:opacity .6s ease, transform .6s ease; will-change:opacity, transform}
+    .reveal.show{opacity:1; transform:translateY(0)}
+
+    /* Cookie banner */
+    .cookieBar{
+      position:fixed; left:16px; right:16px; bottom:16px; z-index:9999;
+      background: rgba(255,255,255,.92);
+      border:1px solid var(--border);
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      padding: 14px;
+      display:none;
+    }
+    .cookieRow{display:flex; gap:12px; flex-wrap:wrap; align-items:center; justify-content:space-between}
+    .cookieBar p{margin:0; color:var(--slate); line-height:1.45; max-width:85ch; font-size:13.8px}
+    .cookieBtns{display:flex; gap:10px; flex-wrap:wrap}
+
+    @media (max-width:900px){
+      .hero{grid-template-columns:1fr; padding-top:26px}
+      nav{display:none}
+      .grid3{grid-template-columns:1fr}
+      .grid2{grid-template-columns:1fr}
+      .cta{flex-direction:column; align-items:flex-start}
+    }
+    @media (prefers-reduced-motion: reduce){
+      html{scroll-behavior:auto}
+      .btn,.reveal,.blob{transition:none; animation:none}
+      #bgCanvas{display:none}
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id="bgCanvas" aria-hidden="true"></canvas>
+  <div class="blob a" aria-hidden="true"></div>
+  <div class="blob b" aria-hidden="true"></div>
+
+  <header>
+    <div class="wrap">
+      <div class="nav">
+        <a class="brand" href="#top" aria-label="Function8 home">
+          <span class="mark" aria-hidden="true">8</span>
+          <span>Function8<small>Care that keeps going</small></span>
+        </a>
+
+        <nav aria-label="On-page navigation">
+          <a href="#how">How it works</a>
+          <a href="#services">What we help with</a>
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a>
+        </nav>
+
+        <a class="btn primary" href="#contact">Let’s chat</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap" id="top">
+    <section class="hero" aria-label="Hero">
+      <div class="reveal">
+        <span class="pill"><span class="dot" aria-hidden="true"></span> GP-led wellbeing support (with a functional lens)</span>
+        <h1>Hi — you’re in the right place.</h1>
+        <p class="lead">
+          If you’ve been feeling “not quite yourself” — tired, stressed, foggy, or just out of balance —
+          Function8 is here to help. We take time, join the dots, and build a plan that actually fits your life.
+        </p>
+        <div class="heroActions">
+          <a class="btn primary" href="#contact">Book a friendly welcome call</a>
+          <a class="btn" href="#how">How it works</a>
+        </div>
+        <div class="trust" role="list">
+          <div role="listitem"><b>10+ years</b> GP experience</div>
+          <div role="listitem"><b>Calm, kind</b> consultations</div>
+          <div role="listitem"><b>Simple steps</b> you can stick to</div>
+        </div>
+      </div>
+
+      <aside class="card heroCard reveal" aria-label="What you can expect">
+        <div class="heroCardInner">
+          <h2 style="font-size:18px;">What it feels like working together</h2>
+          <ul class="checklist">
+            <li><span class="tick">✓</span><span><strong>Warm and unrushed</strong> — you won’t feel hurried.</span></li>
+            <li><span class="tick">✓</span><span><strong>Clear and practical</strong> — no overwhelm, no jargon.</span></li>
+            <li><span class="tick">✓</span><span><strong>Joined-up thinking</strong> — we look at the whole picture.</span></li>
+            <li><span class="tick">✓</span><span><strong>Steady progress</strong> — small changes that add up (that’s the “8”).</span></li>
+          </ul>
+        </div>
+      </aside>
+    </section>
+
+    <section id="how" class="reveal">
+      <h2>How it works</h2>
+      <p class="sub">A calm reset: we listen, we simplify, and we move forward together.</p>
+      <div class="grid3" style="margin-top:14px;">
+        <div class="card tile"><div class="icon">1</div><h3>Start with a chat</h3><p>Tell us what’s been going on. You can share as much or as little as you like.</p></div>
+        <div class="card tile"><div class="icon">2</div><h3>Join the dots</h3><p>We look for patterns across sleep, stress, food, routines, and symptoms — and keep it easy to understand.</p></div>
+        <div class="card tile"><div class="icon">3</div><h3>Your “next right step” plan</h3><p>Simple steps you can actually do — plus follow-ups to keep you supported.</p></div>
+      </div>
+    </section>
+
+    <section id="services" class="reveal">
+      <h2>What we help with</h2>
+      <p class="sub">Common starting points — and if yours isn’t listed, that’s okay. We’ll figure it out together.</p>
+      <div class="grid2" style="margin-top:14px;">
+        <div class="card tile"><div class="icon">🌿</div><h3>Feeling tired / “flat”</h3><p>When energy is low and motivation is gone — we’ll work gently on foundations that bring you back.</p></div>
+        <div class="card tile"><div class="icon">🧠</div><h3>Stress, sleep & burnout</h3><p>Practical, calming support for nervous system load, sleep routines, and overwhelm.</p></div>
+        <div class="card tile"><div class="icon">🍽</div><h3>Digestion & gut comfort</h3><p>Support for bloating, discomfort, food triggers, and building a calmer daily rhythm.</p></div>
+        <div class="card tile"><div class="icon">⚖</div><h3>Metabolic health</h3><p>Sustainable steps for steady energy, cravings, movement, and habits that stick.</p></div>
+      </div>
+
+      <div class="card cta" style="margin-top:14px;">
+        <div>
+          <h3>Not sure what you need?</h3>
+          <p style="margin:0; color:var(--slate); line-height:1.6;">No problem. A welcome call is simply a safe place to start.</p>
+        </div>
+        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+          <a class="btn primary" href="#contact">Book a welcome call</a>
+          <a class="btn" href="#about">Meet Function8</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="reveal">
+      <h2>About Function8</h2>
+      <p class="sub">
+        Function8 is led by a licensed GP (10+ years experience), bringing a whole-person approach inspired by functional medicine —
+        while staying grounded in safe clinical practice.
+      </p>
+      <div class="grid3" style="margin-top:14px;">
+        <div class="card tile"><div class="icon">🩺</div><h3>Medical-first</h3><p>We keep things safe, sensible, and evidence-aware — and we explain clearly.</p></div>
+        <div class="card tile"><div class="icon">🤝</div><h3>Human-first</h3><p>No judgement. No shaming. Just kind support and practical next steps.</p></div>
+        <div class="card tile"><div class="icon">∞</div><h3>Small steps → big change</h3><p>Momentum beats perfection. That’s the “8”: health that lasts.</p></div>
+      </div>
+    </section>
+
+    <section id="contact" class="reveal">
+      <h2>Say hello</h2>
+      <p class="sub">Send a quick message — even a few words is plenty. We’ll reply with next steps.</p>
+
+      <div class="card" style="padding:18px; margin-top:14px;">
+        <!-- Netlify Forms: works when deployed on Netlify -->
+        <form name="function8-contact"
+              method="POST"
+              data-netlify="true"
+              netlify-honeypot="bot-field"
+              action="/thanks.html">
+
+          <!-- honeypot field (hidden) -->
+          <p style="display:none;">
+            <label>Don’t fill this out: <input name="bot-field" /></label>
+          </p>
+
+          <input type="hidden" name="form-name" value="function8-contact" />
+
+          <div class="grid2">
+            <label><strong>Name</strong>
+              <input required name="name" type="text" placeholder="Your name" autocomplete="name" />
+            </label>
+            <label><strong>Email</strong>
+              <input required name="email" type="email" placeholder="you@example.com" autocomplete="email" />
+            </label>
+          </div>
+
+          <label style="margin-top:12px;"><strong>What would you like help with?</strong>
+            <textarea required name="message" rows="4" placeholder="Energy, sleep, stress, digestion… whatever’s going on."></textarea>
+          </label>
+
+          <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center; justify-content:space-between; margin-top:12px;">
+            <p style="margin:0; color:var(--slate); font-size:13.8px; line-height:1.55; max-width:70ch;">
+              <strong>Medical note:</strong> This site is general information and does not replace urgent care.
+              If symptoms are severe or sudden, seek urgent medical help.
+            </p>
+            <button class="btn primary" type="submit" style="cursor:pointer;">Send message</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <footer>
+      <div class="footerRow">
+        <div>
+          <p style="margin:0;"><strong>Function8</strong> — Care that keeps going.</p>
+          <p style="margin:10px 0 0; max-width:80ch;">
+            © <span id="y"></span> Function8. Replace placeholders (domain, OG image, phone, policies) before publishing.
+          </p>
+        </div>
+        <div style="display:flex; gap:14px; flex-wrap:wrap;">
+          <a href="#top">Back to top</a>
+          <a href="/privacy.html">Privacy</a>
+          <a href="/cookies.html">Cookies</a>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <!-- Cookie banner -->
+  <div id="cookieBar" class="cookieBar" role="dialog" aria-live="polite" aria-label="Cookie preferences">
+    <div class="cookieRow">
+      <p>
+        We use essential cookies to make this site work. With your permission, we’d also like to use analytics cookies to understand what’s helpful.
+        You can choose “Reject” and the site will still work.
+      </p>
+      <div class="cookieBtns">
+        <button class="btn" id="cookieReject" type="button">Reject</button>
+        <button class="btn primary" id="cookieAccept" type="button">Accept</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Three.js (optional) -->
+  <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+
+  <script>
+    // year
+    document.getElementById("y").textContent = new Date().getFullYear();
+
+    // reveal on scroll
+    const revealEls = Array.from(document.querySelectorAll(".reveal"));
+    const io = new IntersectionObserver((entries) => {
+      for (const ent of entries) {
+        if (ent.isIntersecting) { ent.target.classList.add("show"); io.unobserve(ent.target); }
+      }
+    }, { threshold: 0.12 });
+    revealEls.forEach(el => io.observe(el));
+
+    // ---------------------------
+    // Cookie consent (simple)
+    // ---------------------------
+    const cookieBar = document.getElementById("cookieBar");
+    const cookieAccept = document.getElementById("cookieAccept");
+    const cookieReject = document.getElementById("cookieReject");
+
+    const CONSENT_KEY = "f8_cookie_consent"; // "accept" | "reject"
+    const consent = localStorage.getItem(CONSENT_KEY);
+
+    function showBannerIfNeeded(){
+      if (!consent) cookieBar.style.display = "block";
+    }
+    function hideBanner(){ cookieBar.style.display = "none"; }
+
+    // Analytics loader ONLY after consent
+    function loadAnalytics(){
+      // Example: Google Analytics 4 (replace G-XXXXXXX)
+      // Do NOT load this before consent. (Non-essential cookies require consent.) :contentReference[oaicite:1]{index=1}
+      const s1 = document.createElement("script");
+      s1.async = true;
+      s1.src = "https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX";
+      document.head.appendChild(s1);
+
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){ dataLayer.push(arguments); }
+      window.gtag = gtag;
+      gtag("js", new Date());
+      gtag("config", "G-XXXXXXX", { anonymize_ip: true });
+    }
+
+    if (consent === "accept") loadAnalytics();
+    showBannerIfNeeded();
+
+    cookieAccept.addEventListener("click", () => {
+      localStorage.setItem(CONSENT_KEY, "accept");
+      hideBanner();
+      loadAnalytics();
+    });
+    cookieReject.addEventListener("click", () => {
+      localStorage.setItem(CONSENT_KEY, "reject");
+      hideBanner();
+    });
+
+    // ---------------------------
+    // Optional Three.js background
+    // ---------------------------
+    const ENABLE_THREE = true;
+
+    if (ENABLE_THREE && window.THREE && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      const canvas = document.getElementById("bgCanvas");
+      const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(55, 1, 0.1, 1000);
+      camera.position.z = 120;
+
+      const COUNT = 900;
+      const positions = new Float32Array(COUNT * 3);
+      const speeds = new Float32Array(COUNT);
+
+      for (let i = 0; i < COUNT; i++) {
+        const i3 = i * 3;
+        positions[i3 + 0] = (Math.random() - 0.5) * 260;
+        positions[i3 + 1] = (Math.random() - 0.5) * 160;
+        positions[i3 + 2] = (Math.random() - 0.5) * 220;
+        speeds[i] = 0.15 + Math.random() * 0.55;
+      }
+
+      const geom = new THREE.BufferGeometry();
+      geom.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+      const material = new THREE.PointsMaterial({ size: 1.6, transparent: true, opacity: 0.35 });
+      const points = new THREE.Points(geom, material);
+      scene.add(points);
+      scene.add(new THREE.AmbientLight(0xffffff, 1.0));
+
+      function resize() {
+        const w = window.innerWidth, h = window.innerHeight;
+        renderer.setSize(w, h, false);
+        camera.aspect = w / h;
+        camera.updateProjectionMatrix();
+      }
+      window.addEventListener("resize", resize);
+      resize();
+
+      let t = 0;
+      (function anim(){
+        t += 0.0035;
+        const pos = geom.attributes.position.array;
+        for (let i = 0; i < COUNT; i++) {
+          const i3 = i * 3;
+          pos[i3 + 1] += 0.03 * speeds[i];
+          pos[i3 + 0] += Math.sin(t + i * 0.02) * 0.01;
+          if (pos[i3 + 1] > 90) pos[i3 + 1] = -90;
+        }
+        geom.attributes.position.needsUpdate = true;
+        points.rotation.y = Math.sin(t) * 0.08;
+        points.rotation.x = Math.cos(t * 0.8) * 0.05;
+        renderer.render(scene, camera);
+        requestAnimationFrame(anim);
+      })();
+    }
+  </script>
+</body>
+</html>
+
